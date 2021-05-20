@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Roles
+﻿
+namespace Roles.Services
 {
     /// <summary>
     /// Сервис выдачи доступа для сотрудника
@@ -10,7 +8,7 @@ namespace Roles
     {
         #region Поля
 
-        private Printer _printer = new Printer();
+        private PrintService _printer = new PrintService();
 
         #endregion 
 
@@ -22,12 +20,12 @@ namespace Roles
 
         #region Методы
 
-        public void GrantAll(IEmployee emp)
+        public void GrantAll(IEmployee emp, IAccountSystem account, IChat chat)
         {
             RegisterEmail(emp.GetEmail());
             SetPortalAccess(emp.GetRole());
-            AddToTelegrammChats(emp.GetChats());
-            RegisterAccountId(emp.GetAccountId());
+            AddToTelegrammChats(emp.GetChats(chat));
+            RegisterAccountId(emp.GetAccountId(account));
         }
 
         public void SetPortalAccess(string role)
@@ -40,18 +38,11 @@ namespace Roles
             _printer.Print(email);
         }
 
-        public void AddToTelegrammChats(List<string> chats)
+        public void AddToTelegrammChats(string chats)
         {
-            if (chats.Count > 0)
-            {
-                _printer.Print("Список чатов:");
-
-                foreach (var chat in chats)
-                {
-                    _printer.Print(chat);
-                }
-            }
+            _printer.Print($"Список чатов - {chats}");
         }
+
         public void RegisterAccountId(string id)
         {
             _printer.Print(id);

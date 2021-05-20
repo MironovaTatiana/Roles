@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Roles
+﻿
+namespace Roles.Models
 {
     /// <summary>
     /// Аналитик
@@ -19,11 +17,6 @@ namespace Roles
         public override string GetRole()
         {
             return "user";
-        }
-
-        public override List<string> GetChats()
-        {
-            return new List<string>() { "AnalystsChat", "SpeakingChat" };
         }
 
         #endregion

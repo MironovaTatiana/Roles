@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Roles
+﻿
+namespace Roles.Employees
 {
     /// <summary>
     /// Менеджер
     /// </summary>
-    public class Manager : Employee
+    public class Manager : EmployeeBase
     {
         #region Конструкторы
 
@@ -19,11 +17,6 @@ namespace Roles
         public override string GetRole()
         {
             return "admin";
-        }
-
-        public override List<string> GetChats()
-        {
-            return new List<string>() { "ManagersChat", "SpeakingChat" };
         }
 
         #endregion

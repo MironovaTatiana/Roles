@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
+using Roles.Services;
 
 namespace Roles
 {
@@ -11,7 +10,7 @@ namespace Roles
             Console.WriteLine("Необходимо добавить нового сотрудника. Укажите ФИО, телефон, должность через запятую:");
 
             var input = Console.ReadLine();
-            var parser = new Parser();
+            var parser = new RequisitesService();
 
             parser.ParseString(input);
         }

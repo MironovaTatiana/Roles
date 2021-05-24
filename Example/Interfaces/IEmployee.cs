@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace Roles
 {
     /// <summary>
@@ -10,18 +8,17 @@ namespace Roles
     {
         #region Свойства
 
-        public abstract string Fio { get; set; }
-
-        public string Email { get; set; }
+        string Fio { get; }
+        string Phone { get; }
+        string Post { get; }
+        string Email { get; }
 
         #endregion 
 
         #region Методы
 
-        public string GetEmail();
-        public string GetRole();
-        public string GetAccountId();
-        public List<string> GetChats();
+        string GetEmail();
+        string GetRole();
 
         #endregion
     }

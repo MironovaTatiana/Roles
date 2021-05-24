@@ -1,30 +1,16 @@
 ﻿using System;
-using System.Linq;
+using Roles.Employees;
 
-namespace Roles
+namespace Roles.Services
 {
     /// <summary>
-    /// Парсер
+    /// Сервис для получения реквизитов
     /// </summary>
-    class Parser
+    class RequisitesService
     {
-        #region Перечисления
-
-        /// <summary>
-        /// Список должностей
-        /// </summary>
-        private static readonly Type[] _posts =
-        {
-            typeof(Programmer),
-            typeof(Manager),
-            typeof(Analyst)
-        };
-
-        #endregion
-
         #region Конструктор
 
-        public Parser() { }
+        public RequisitesService() { }
 
         #endregion
 
@@ -39,19 +25,22 @@ namespace Roles
                 if (requisites.Length == 3)
                 {
                     var post = requisites[2]?.Trim();
-                    var postForUsing = _posts.FirstOrDefault(p => p.Name == post);
 
-                    if (postForUsing != null)
+                    if (!string.IsNullOrEmpty(post))
                     {
-                        var parser = (Employee)Activator.CreateInstance(postForUsing);
+                        var factory = new EmployeesFactory();
+                        var parser = factory.GetType(post);
 
-                        if (parser != null)
-                        {
-                            var granter = new AccessGranterService();
+                        parser.Fio = requisites[0]?.Trim();
+                        parser.Phone = requisites[1]?.Trim();
+                        parser.Post = post;
 
-                            parser.Fio = requisites[0]?.Trim();
-                            granter.GrantAll(parser);
-                        }
+                        var account = new AccountService();
+                        var chat = new ChatService();
+
+                        var granter = new AccessGranterService(parser, account, chat);
+
+                        granter.GrantAll();
                     }
                     else
                     {
@@ -63,11 +52,11 @@ namespace Roles
                     Console.WriteLine("Введены некорректные реквизиты");
                 }
             }
-            catch 
+            catch
             {
                 Console.WriteLine("Во время добавления сотрудника произошла ошибка");
             }
-        }
+        }    
 
         #endregion
     }

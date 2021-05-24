@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Roles
+﻿
+namespace Roles.Employees
 {
     /// <summary>
     /// Работник
     /// </summary>
-    public abstract class Employee : IEmployee
+    public abstract class EmployeeBase : IEmployee
     {
         #region Свойства
 
@@ -14,11 +12,15 @@ namespace Roles
 
         public string Email { get; set; }
 
+        public string Phone { get; set; }
+
+        public string Post { get; set; }
+
         #endregion
 
         #region Конструктор
 
-        public Employee() {}
+        public EmployeeBase() { }
 
         #endregion
 
@@ -26,19 +28,9 @@ namespace Roles
 
         public abstract string GetRole();
 
-        public abstract List<string> GetChats();
-
         public string GetEmail()
         {
             return $"{Fio?.Replace(" ", "_")}@mail.ru";
-        }
-
-        public string GetAccountId()
-        {
-            var random = new Random();
-            var id = random.Next(10000000, 99999999);
-
-            return id.ToString();
         }
 
         #endregion

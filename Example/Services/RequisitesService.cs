@@ -1,5 +1,5 @@
 ﻿using System;
-using Roles.Models;
+using Roles.Employees;
 
 namespace Roles.Services
 {
@@ -28,8 +28,8 @@ namespace Roles.Services
 
                     if (!string.IsNullOrEmpty(post))
                     {
-                        var parser = GetType(post);
-                        var granter = new AccessGranterService();
+                        var factory = new EmployeesFactory();
+                        var parser = factory.GetType(post);
 
                         parser.Fio = requisites[0]?.Trim();
                         parser.Phone = requisites[1]?.Trim();
@@ -38,7 +38,9 @@ namespace Roles.Services
                         var account = new AccountService();
                         var chat = new ChatService();
 
-                        granter.GrantAll(parser, account.GetAccountId(parser), chat.GetChats(parser));
+                        var granter = new AccessGranterService(parser, account, chat);
+
+                        granter.GrantAll();
                     }
                     else
                     {
@@ -54,22 +56,7 @@ namespace Roles.Services
             {
                 Console.WriteLine("Во время добавления сотрудника произошла ошибка");
             }
-        }
-
-        private Employee GetType(string name)
-        {
-            switch (name)
-            {
-                case nameof(Programmer):
-                    return new Programmer();
-                case nameof(Manager):
-                    return new Manager();
-                case nameof(Analyst):
-                    return new Analyst();
-                default:
-                    throw new Exception();
-            }
-        }
+        }    
 
         #endregion
     }

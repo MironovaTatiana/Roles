@@ -10,22 +10,32 @@ namespace Roles.Services
 
         private PrintService _printer = new PrintService();
 
+        public IAccountSystem _account { get; set; }
+        public IChat _chat { get; set; }
+
+        public IEmployee _emp { get; set; }
+
         #endregion 
 
         #region Конструктор
 
-        public AccessGranterService() { }
+        public AccessGranterService(IEmployee emp, IAccountSystem account, IChat chat) 
+        {
+            _emp = emp;
+            _account = account;
+            _chat = chat;      
+        }
 
         #endregion
 
         #region Методы
 
-        public void GrantAll(IEmployee emp, IAccountSystem account, IChat chat)
+        public void GrantAll()
         {
-            RegisterEmail(emp.GetEmail());
-            SetPortalAccess(emp.GetRole());
-            AddToTelegrammChats(emp.GetChats(chat));
-            RegisterAccountId(emp.GetAccountId(account));
+            RegisterEmail(_emp.GetEmail());
+            SetPortalAccess(_emp.GetRole());
+            AddToTelegrammChats(_chat.GetChats(_emp.Phone, _emp.Post));
+            RegisterAccountId(_account.GetAccountId(_emp.Fio, _emp.Phone, _emp.Post));
         }
 
         public void SetPortalAccess(string role)
@@ -43,9 +53,9 @@ namespace Roles.Services
             _printer.Print($"Список чатов - {chats}");
         }
 
-        public void RegisterAccountId(string id)
+        public void RegisterAccountId(int id)
         {
-            _printer.Print(id);
+            _printer.Print(id.ToString());
         }
 
         #endregion

@@ -1,14 +1,14 @@
 ﻿
-namespace Roles.Models
+namespace Roles.Employees
 {
     /// <summary>
-    /// Менеджер
+    /// Аналитик
     /// </summary>
-    public class Manager : Employee
+    public class Analyst : EmployeeBase
     {
         #region Конструкторы
 
-        public Manager() { }
+        public Analyst() { }
 
         #endregion
 
@@ -16,7 +16,7 @@ namespace Roles.Models
 
         public override string GetRole()
         {
-            return "admin";
+            return "user";
         }
 
         #endregion

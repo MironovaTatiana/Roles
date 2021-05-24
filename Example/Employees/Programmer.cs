@@ -1,14 +1,14 @@
 ﻿
-namespace Roles.Models
+namespace Roles.Employees
 {
     /// <summary>
-    /// Аналитик
+    /// Программист
     /// </summary>
-    public class Analyst : Employee
+    public class Programmer : EmployeeBase
     {
         #region Конструкторы
 
-        public Analyst() { }
+        public Programmer() { }
 
         #endregion
 

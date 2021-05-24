@@ -1,13 +1,12 @@
 ﻿using System;
-using Moq;
-using Roles.Models;
+
 
 namespace Roles.Services
 {
     /// <summary>
     /// Сервис выдачи учетных записей
     /// </summary>
-    class AccountService
+    class AccountService : IAccountSystem
     {
         #region Конструктор
 
@@ -17,17 +16,12 @@ namespace Roles.Services
 
         #region Методы
 
-        public IAccountSystem GetAccountId(Employee emp)
+        public int GetAccountId(string fio, string phone, string post)
         {
             var random = new Random();
             var id = random.Next(10000000, 99999999);
-            var mockService = new Mock<IAccountSystem>();
 
-            mockService
-                    .Setup(r => r.GetId(emp.Fio, emp.Phone, emp.Post))
-                    .Returns(id);
-
-            return mockService.Object;
+            return id;
         }
 
         #endregion

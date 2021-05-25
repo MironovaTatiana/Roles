@@ -8,10 +8,9 @@ namespace Roles
     {
         #region Свойства
 
-        abstract string Fio { get; }
-        abstract string Phone { get; }
-        abstract string Post { get; }
-
+        string Fio { get; }
+        string Phone { get; }
+        string Post { get; }
         string Email { get; }
 
         #endregion 
@@ -20,8 +19,6 @@ namespace Roles
 
         string GetEmail();
         string GetRole();
-        string GetAccountId(IAccountSystem account);
-        string GetChats(IChat chat);
 
         #endregion
     }

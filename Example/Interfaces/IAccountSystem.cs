@@ -8,7 +8,7 @@ namespace Roles
     {
         #region Методы
 
-        int GetId(string fio, string phone, string post);
+        int GetAccountId(string fio, string phone, string post);
 
         #endregion
     }

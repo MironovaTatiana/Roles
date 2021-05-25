@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using Roles.Models;
+using Roles.Employees;
 
 namespace Roles.Services
 {
     /// <summary>
     /// Сервис выдачи списка чатов
     /// </summary>
-    class ChatService
+    class ChatService : IChat
     {
         #region Поля
 
@@ -32,15 +32,9 @@ namespace Roles.Services
 
         #region Методы
 
-        public IChat GetChats(Employee emp)
+        public string GetChats(string phone, string post)
         {
-            var mockService = new Mock<IChat>();
-
-            mockService
-                    .Setup(r => r.GetChats(emp.Phone, emp.Post))
-                    .Returns(ChatList[emp.Post]);
-
-            return mockService.Object;
+            return ChatList[post]; //stub
         }
 
         #endregion

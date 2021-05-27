@@ -1,18 +1,18 @@
 ﻿using System;
 
-namespace Roles
+namespace Roles.Services
 {
     /// <summary>
     /// Класс, отвечающий за вывод на консоль
     /// </summary>
-    public class Printer
+    public class PrintService
     {
         #region Конструктор
 
         /// <summary>
         /// Класс, отвечающий за вывод на консоль
         /// </summary>
-        public Printer() {}
+        public PrintService() {}
 
         #endregion
 
